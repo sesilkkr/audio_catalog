@@ -79,6 +79,11 @@ public class CatalogService {
         return result;
     }
 
+    public List<AudioItem> searchGenre(String genre) {
+        return filterGenre(genre);
+    }
+
+
     public List<AudioItem> filterCategory(String category) {
         List<AudioItem> result = new ArrayList<>();
         for (AudioItem item : catalog.getItems()) {
