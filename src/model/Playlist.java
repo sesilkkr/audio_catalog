@@ -28,6 +28,7 @@ public class Playlist implements Serializable {
     public void removeItem(AudioItem item) {
         items.remove(item);
     }
+
     @Override
     public String toString() {
         return "Playlist: " + "name=" + name + " (" + items.size() + " items)" ;
