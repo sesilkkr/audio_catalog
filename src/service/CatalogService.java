@@ -5,7 +5,6 @@ import model.Catalog;
 import model.Playlist;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class CatalogService {
@@ -109,14 +108,15 @@ public class CatalogService {
     }
 
     public void sortByTitle() {
-        catalog.getItems().sort(Comparator.comparing(
-                AudioItem::getTitle,
-                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
-        ));
+        catalog.getItems().sort(
+                (a, b) -> a.getTitle().compareToIgnoreCase(b.getTitle())
+        );
     }
 
     public void sortByYear() {
-        catalog.getItems().sort(Comparator.comparingInt(AudioItem::getYear));
+        catalog.getItems().sort(
+                (a, b) -> Integer.compare(a.getYear(), b.getYear())
+        );
     }
 
     public boolean createPlaylist(String name) {
@@ -159,12 +159,12 @@ public class CatalogService {
         Playlist p = getPlaylist(playlistName);
         if (p == null) return false;
 
-        p.getItems().sort(Comparator.comparing(
-                AudioItem::getTitle,
-                Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
-        ));
+        p.getItems().sort(
+                (a, b) -> a.getTitle().compareToIgnoreCase(b.getTitle())
+        );
         return true;
     }
+
 
     public int playlistDuration(String playlistName) {
         Playlist p = getPlaylist(playlistName);
