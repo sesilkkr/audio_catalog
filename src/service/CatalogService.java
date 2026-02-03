@@ -165,6 +165,7 @@ public class CatalogService {
         return true;
     }
 
+
     public int playlistDuration(String playlistName) {
         Playlist p = getPlaylist(playlistName);
         if (p == null) return 0;
