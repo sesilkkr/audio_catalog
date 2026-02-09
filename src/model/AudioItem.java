@@ -3,12 +3,12 @@ package model;
 import java.io.Serializable;
 
 public class AudioItem implements Serializable {
-private String title;
-private String genre;
-private int duration;
-private String author;
-private int year;
-private String category;
+    private String title;
+    private String genre;
+    private int duration;
+    private String author;
+    private int year;
+    private String category;
 
 public AudioItem(String title, String genre, int duration, String author, int year, String category) {
     this.title = title;
