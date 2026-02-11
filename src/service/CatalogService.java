@@ -30,7 +30,6 @@ public class CatalogService {
         return normalizedFirst.equals(normalizedSecond);
     }
 
-
     private boolean containsText(String fullText, String searchText) {
 
         String normalizedFull = norm(fullText);
@@ -40,7 +39,6 @@ public class CatalogService {
 
         return normalizedFull.contains(normalizedSearch);
     }
-
 
     public void addItem(AudioItem item) {
         if (item == null) return;
@@ -98,7 +96,6 @@ public class CatalogService {
     public List<AudioItem> searchGenre(String genre) {
         return filterGenre(genre);
     }
-
 
     public List<AudioItem> filterCategory(String category) {
         List<AudioItem> result = new ArrayList<>();
@@ -186,7 +183,6 @@ public class CatalogService {
         );
         return true;
     }
-
 
     public int playlistDuration(String playlistName) {
         Playlist p = getPlaylist(playlistName);
