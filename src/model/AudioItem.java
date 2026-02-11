@@ -62,11 +62,12 @@ public AudioItem(String title, String genre, int duration, String author, int ye
 
     @Override
     public String toString() {
-        return "Title: " + title +
-                ", Genre: " + genre +
-                ", Duration: " + duration + " sec" +
-                ", Author: " + author +
-                ", Year: " + year +
-                ", Category: " + category;
+        return "Заглавие: " + title +
+                ", Жанр: " + genre +
+                ", Продължителност: " + duration + " сек" +
+                ", Автор: " + author +
+                ", Година: " + year +
+                ", Категория: " + category;
     }
+
 }
