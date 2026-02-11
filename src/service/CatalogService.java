@@ -126,6 +126,11 @@ public class CatalogService {
         catalog.getPlaylists().add(new Playlist(name));
         return true;
     }
+    public boolean removePlaylist(String name) {
+        Playlist p = getPlaylist(name);
+        if (p == null) return false;
+        return catalog.getPlaylists().remove(p);
+    }
 
     public List<Playlist> playlists() {
         return catalog.getPlaylists();
