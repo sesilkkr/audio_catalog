@@ -31,6 +31,6 @@ public class Playlist implements Serializable {
 
     @Override
     public String toString() {
-        return "Playlist: " + "name=" + name + " (" + items.size() + " items)" ;
+        return "Playlist: " + "име=" + name + " (" + items.size() + " обекта)" ;
     }
 }
