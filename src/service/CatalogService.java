@@ -15,15 +15,32 @@ public class CatalogService {
         this.catalog = catalog;
     }
 
-    private boolean containsIgnoreCase(String text, String part) {
-        if (text == null || part == null) return false;
-        return text.toLowerCase().contains(part.toLowerCase());
+    private String norm(String s) {
+        if (s == null) return null;
+        return s.trim().replaceAll("\\s+", " ").toLowerCase();
     }
 
-    private boolean equalsIgnoreCaseSafe(String a, String b) {
-        if (a == null || b == null) return false;
-        return a.equalsIgnoreCase(b);
+    private boolean equalsText(String firstText, String secondText) {
+
+        String normalizedFirst = norm(firstText);
+        String normalizedSecond = norm(secondText);
+
+        if (normalizedFirst == null || normalizedSecond == null) return false;
+
+        return normalizedFirst.equals(normalizedSecond);
     }
+
+
+    private boolean containsText(String fullText, String searchText) {
+
+        String normalizedFull = norm(fullText);
+        String normalizedSearch = norm(searchText);
+
+        if (normalizedFull == null || normalizedSearch == null) return false;
+
+        return normalizedFull.contains(normalizedSearch);
+    }
+
 
     public void addItem(AudioItem item) {
         if (item == null) return;
@@ -37,7 +54,7 @@ public class CatalogService {
     public AudioItem findByTitle(String title) {
         if (title == null) return null;
         for (AudioItem item : catalog.getItems()) {
-            if (equalsIgnoreCaseSafe(item.getTitle(), title)) return item;
+            if (equalsText(item.getTitle(), title)) return item;
         }
         return null;
     }
@@ -57,7 +74,7 @@ public class CatalogService {
     public List<AudioItem> searchTitle(String titlePart) {
         List<AudioItem> result = new ArrayList<>();
         for (AudioItem item : catalog.getItems()) {
-            if (containsIgnoreCase(item.getTitle(), titlePart)) result.add(item);
+            if (containsText(item.getTitle(), titlePart)) result.add(item);
         }
         return result;
     }
@@ -65,7 +82,7 @@ public class CatalogService {
     public List<AudioItem> searchAuthor(String authorPart) {
         List<AudioItem> result = new ArrayList<>();
         for (AudioItem item : catalog.getItems()) {
-            if (containsIgnoreCase(item.getAuthor(), authorPart)) result.add(item);
+            if (containsText(item.getAuthor(), authorPart)) result.add(item);
         }
         return result;
     }
@@ -73,7 +90,7 @@ public class CatalogService {
     public List<AudioItem> filterGenre(String genre) {
         List<AudioItem> result = new ArrayList<>();
         for (AudioItem item : catalog.getItems()) {
-            if (equalsIgnoreCaseSafe(item.getGenre(), genre)) result.add(item);
+            if (equalsText(item.getGenre(), genre)) result.add(item);
         }
         return result;
     }
@@ -86,7 +103,7 @@ public class CatalogService {
     public List<AudioItem> filterCategory(String category) {
         List<AudioItem> result = new ArrayList<>();
         for (AudioItem item : catalog.getItems()) {
-            if (equalsIgnoreCaseSafe(item.getCategory(), category)) result.add(item);
+            if (equalsText(item.getCategory(), category)) result.add(item);
         }
         return result;
     }
@@ -94,7 +111,7 @@ public class CatalogService {
     public List<AudioItem> filterAuthor(String author) {
         List<AudioItem> result = new ArrayList<>();
         for (AudioItem item : catalog.getItems()) {
-            if (equalsIgnoreCaseSafe(item.getAuthor(), author)) result.add(item);
+            if (equalsText(item.getAuthor(), author)) result.add(item);
         }
         return result;
     }
@@ -139,7 +156,7 @@ public class CatalogService {
     public Playlist getPlaylist(String name) {
         if (name == null) return null;
         for (Playlist p : catalog.getPlaylists()) {
-            if (equalsIgnoreCaseSafe(p.getName(), name)) return p;
+            if (equalsText(p.getName(), name)) return p;
         }
         return null;
     }
@@ -157,7 +174,7 @@ public class CatalogService {
         Playlist p = getPlaylist(playlistName);
         if (p == null || itemTitleExact == null) return false;
 
-        return p.getItems().removeIf(it -> equalsIgnoreCaseSafe(it.getTitle(), itemTitleExact));
+        return p.getItems().removeIf(it -> equalsText(it.getTitle(), itemTitleExact));
     }
 
     public boolean sortPlaylistByTitle(String playlistName) {
